@@ -6,3 +6,4 @@ Foi criado uma tabela com o nome cidadao. Com as colunas nis (varchar 45, not nu
 
 A aplicação, possui 2 campos. Campo para filtrar NIS e campo para nome. Ao cadastar um nome, aleatoriamente cadastra um valor unico no banco de dados usando a função uniqid com o prefixo GE. Ao filtrar pelo NIS, é pego o nome do cidadão a partir daquele valor do NIS.
 
+A presente aplicação teve como objetivo ser mais simples. Não foi utilizado o quesito de orientação a objetos (somente na conexão ao banco de dados), devido ao uso de memória, e utilizar o codigo mais simples o possivel para ser funcional e seguir com os requisitos.
