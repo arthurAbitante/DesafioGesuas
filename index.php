@@ -5,15 +5,8 @@
 <body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<?php
-    $pdo = new PDO('mysql:host=localhost;dbname=gesuas', 'root', '123456');
-
-    if(isset($_POST['nome'])){
-        $sql = $pdo->prepare("INSERT INTO cidadao VALUES (?, ?)");
-        $sql->execute(array(uniqid('GE'), $_POST['nome']));
-        echo 'Inserido com sucesso!';
-    }
-?>
+<?php include_once('cadastrar.php') ?>
+<?php include_once('filtrar.php') ?>
 
 <form name="search_form" method="post">
     <input type="text" name="search_box" id="search_box" value="">
@@ -30,16 +23,21 @@
     </div>
 </form>
 
+<?php
+    inserirNome($_POST['nome']);
+    var_dump(inserirNome($_POST['nome']));
+?>
+
 <?php 
 
 if(isset($_POST['search'])){
-    $search_term = $_POST['search_box'];
-    $sql_filters = "SELECT * FROM cidadao WHERE nis LIKE '%{$search_term}'";
-    $sql = $pdo->prepare($sql_filters);
+    $sql = filtrarPorNis($_POST['search_box']);
+    //var_dump($sql);
+
 }else{
-    $sql = $pdo->prepare("SELECT * FROM cidadao");
+    $sql = conexaoBD()->prepare("SELECT * FROM cidadao");
 }
-var_dump(isset($_POST['search']));
+var_dump($sql);
 
 $sql->execute();
 
